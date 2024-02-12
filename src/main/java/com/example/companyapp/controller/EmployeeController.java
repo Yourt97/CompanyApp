@@ -31,14 +31,15 @@ public class EmployeeController {
     }
 
 
-    @PostMapping("/add")
+    @PostMapping()
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
         Employee addEmployee = employeeService.addEmployee(employee);
         return new ResponseEntity<>(addEmployee, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
 
+
+    @PutMapping()
     public ResponseEntity<Employee> updateEmployee(@RequestBody Employee updatedEmployee) {
         Employee updateEmployee = employeeService.updateEmployee(updatedEmployee);
 

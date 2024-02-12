@@ -1,18 +1,22 @@
 package com.example.companyapp.model.employee;
 
 import com.example.companyapp.model.department.Department;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+
 @Getter
 @Setter
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
 @Table(
         name = "employee",
@@ -22,18 +26,19 @@ import java.util.Date;
                     columnNames = "email"
             )
 )
-public class Employee implements Serializable {
+public class Employee  {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column (name = "Employee_id",nullable = false, updatable = false)
     private Long id;
-    @Column(name ="FirstName",nullable = false)
+    @Column(name ="First_Name",nullable = false)
     private String firstName;
-    @Column(name ="LastName",nullable = false)
+    @Column(name ="Last_Name",nullable = false)
     private String lastName;
     @Enumerated(EnumType.STRING)
-    @Column(name = "JobTitle",nullable = false)
+    @Column(name = "Job_Title",nullable = false)
     private JobTitle jobTitle;
     @Enumerated(EnumType.STRING)
     @Column(name = "Gender",nullable = false)
@@ -42,25 +47,31 @@ public class Employee implements Serializable {
     private String city;
     @Column(name ="Email",nullable = false)
     private String email;
-    @Column(name ="DateOfEmployment",nullable = false)
+    @Column(name ="Date_Of_Employment",nullable = false)
     private Date dateOfEmployment;
     @Column(name ="Salary",nullable = false)
     private BigDecimal salary;
-    @ManyToOne
+
+    @ManyToOne()
     @JoinColumn(name = "department_id")
     private Department department;
 
-    public Employee( String firstName, String lastName,JobTitle jobTitle,Gender gender, String city, String email, Date dateOfEmployment, BigDecimal salary, Department department) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.jobTitle = jobTitle;
-        this.gender = gender;
-        this.city = city;
-        this.email = email;
-        this.dateOfEmployment = dateOfEmployment;
-        this.salary = salary;
-        this.department = department;
-    }
+    @JsonIgnore
+    private String role;
+    @JsonIgnore
+    private String password;
+
+//    public Employee( String firstName, String lastName,JobTitle jobTitle,Gender gender, String city, String email, Date dateOfEmployment, BigDecimal salary, Department department) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.jobTitle = jobTitle;
+//        this.gender = gender;
+//        this.city = city;
+//        this.email = email;
+//        this.dateOfEmployment = dateOfEmployment;
+//        this.salary = salary;
+//        this.department = department;
+//    }
 
     @Override
     public String toString() {

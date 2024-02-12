@@ -1,10 +1,12 @@
 package com.example.companyapp.controller;
 
+import com.example.companyapp.security.UserPrincipal;
 import com.example.companyapp.service.DepartmentService;
 import com.example.companyapp.model.department.Department;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +24,7 @@ public class DepartmentController {
 
 
     @GetMapping("/all")
-    public ResponseEntity<List<Department>> getAllDepartments() {
+    public ResponseEntity<List<Department>> getAllDepartments(@AuthenticationPrincipal UserPrincipal principal) {
         List<Department> findAllDepartments = departmentService.findAllDepartments();
         return new ResponseEntity<>(findAllDepartments,HttpStatus.OK);
     }
