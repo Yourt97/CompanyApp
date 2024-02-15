@@ -1,15 +1,19 @@
 package com.example.companyapp.controller;
 
+import com.example.companyapp.model.employee.Employee;
 import com.example.companyapp.security.UserPrincipal;
 import com.example.companyapp.service.DepartmentService;
 import com.example.companyapp.model.department.Department;
 
+import com.example.companyapp.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+
 
 @RestController
 @RequestMapping("/api/departments")
@@ -18,13 +22,21 @@ public class DepartmentController {
 
     private final DepartmentService departmentService;
 
+
+
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
+
     }
 
-
+//
+//    @GetMapping("/allAuth")
+//    public ResponseEntity<List<Department>> getAllDepartments(@AuthenticationPrincipal UserPrincipal principal) {
+//        List<Department> findAllDepartments = departmentService.findAllDepartments();
+//        return new ResponseEntity<>(findAllDepartments,HttpStatus.OK);
+//    }
     @GetMapping("/all")
-    public ResponseEntity<List<Department>> getAllDepartments(@AuthenticationPrincipal UserPrincipal principal) {
+    public ResponseEntity<List<Department>> getAllDepartments() {
         List<Department> findAllDepartments = departmentService.findAllDepartments();
         return new ResponseEntity<>(findAllDepartments,HttpStatus.OK);
     }
@@ -55,6 +67,8 @@ public class DepartmentController {
          departmentService.deleteDepartment(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
 
 
 

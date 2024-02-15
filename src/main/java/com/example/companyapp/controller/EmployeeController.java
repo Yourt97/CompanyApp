@@ -1,6 +1,8 @@
 package com.example.companyapp.controller;
 
 
+import com.example.companyapp.model.department.Department;
+import com.example.companyapp.service.DepartmentService;
 import com.example.companyapp.service.EmployeeService;
 import com.example.companyapp.model.employee.Employee;
 import org.springframework.http.HttpStatus;
@@ -13,10 +15,12 @@ import java.util.List;
 @RequestMapping("/api/employees")
 public class EmployeeController {
     private final EmployeeService employeeService;
+    private final DepartmentService departmentService;
 
-    public EmployeeController( EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, DepartmentService departmentService) {
         this.employeeService = employeeService;
 
+        this.departmentService = departmentService;
     }
 
     @GetMapping("/all")
@@ -62,6 +66,20 @@ public class EmployeeController {
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
         employeeService.deleteEmployee(id);
         return new ResponseEntity<>( HttpStatus.OK);
+    }
+
+
+    @PutMapping("/{employee_id}/department/{DepartmentID}")
+   public Employee assignEmployeeToDepartment(
+            @PathVariable Long DepartmentID,
+            @PathVariable long employee_id
+    ){
+        Department department = departmentService.findDepartmentById(DepartmentID);
+        Employee employee = employeeService.findEmployeeById(employee_id);
+        employee.setDepartment(department);
+        return employeeService.updateEmployee(employee);
+
+
     }
 
 

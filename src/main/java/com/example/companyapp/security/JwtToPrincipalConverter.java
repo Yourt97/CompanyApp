@@ -1,7 +1,8 @@
 package com.example.companyapp.security;
 
+import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import lombok.var;
+
 import org.apache.catalina.User;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,7 @@ public class JwtToPrincipalConverter {
 
 
     private List<SimpleGrantedAuthority> extractAuthoritiesFromClaim(DecodedJWT jwt){
-        var claim = jwt.getClaim("a");
+        Claim claim = jwt.getClaim("a");
         if (claim.isNull() || claim.isMissing()) return Collections.emptyList();
         return claim.asList(SimpleGrantedAuthority.class);
     }

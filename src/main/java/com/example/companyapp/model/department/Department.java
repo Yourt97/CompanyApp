@@ -2,10 +2,12 @@ package com.example.companyapp.model.department;
 
 
 import com.example.companyapp.model.employee.Employee;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -13,7 +15,8 @@ import java.util.List;
 //@NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name = "department",uniqueConstraints = {@UniqueConstraint(
+@Table(name = "department"
+        ,uniqueConstraints = {@UniqueConstraint(
         name=  "company_id_unique",
         columnNames = {"DepartmentID"})})
 public class Department {
@@ -30,8 +33,9 @@ public class Department {
 
 
 
-    @OneToMany(mappedBy = "department")
-    private List<Employee> employees;
+    @JsonIgnore
+    @OneToMany(mappedBy = "department",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Employee> employees = new ArrayList<Employee>();
 
 
 
@@ -44,6 +48,11 @@ public class Department {
                 ", employees=" + employees +
                 '}';
     }
+
+    public void setEmployees(List<Employee> Employees) {
+        this.employees = Employees;
+    }
+
 
 
 }

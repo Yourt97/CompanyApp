@@ -3,13 +3,12 @@ package com.example.companyapp.model.employee;
 import com.example.companyapp.model.department.Department;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -52,8 +51,10 @@ public class Employee  {
     @Column(name ="Salary",nullable = false)
     private BigDecimal salary;
 
-    @ManyToOne()
-    @JoinColumn(name = "department_id")
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id",referencedColumnName = "DepartmentID",nullable = true)
     private Department department;
 
     @JsonIgnore
@@ -61,17 +62,7 @@ public class Employee  {
     @JsonIgnore
     private String password;
 
-//    public Employee( String firstName, String lastName,JobTitle jobTitle,Gender gender, String city, String email, Date dateOfEmployment, BigDecimal salary, Department department) {
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.jobTitle = jobTitle;
-//        this.gender = gender;
-//        this.city = city;
-//        this.email = email;
-//        this.dateOfEmployment = dateOfEmployment;
-//        this.salary = salary;
-//        this.department = department;
-//     }
+
 
     @Override
     public String toString() {

@@ -7,7 +7,7 @@ import com.example.companyapp.security.JwtIssuer;
 import com.example.companyapp.security.UserPrincipal;
 import com.example.companyapp.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import lombok.var;
+//import lombok.var;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

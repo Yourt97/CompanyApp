@@ -1,5 +1,6 @@
 package com.example.companyapp.service;
 
+import com.example.companyapp.model.department.Department;
 import com.example.companyapp.model.employee.Employee;
 import com.example.companyapp.repo.EmployeeRepository;
 import com.example.companyapp.exception.UserNotFoundException;
@@ -13,10 +14,12 @@ import java.util.Optional;
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final DepartmentService departmentService;
 
     @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    public EmployeeService(EmployeeRepository employeeRepository, DepartmentService departmentService) {
         this.employeeRepository = employeeRepository;
+        this.departmentService = departmentService;
     }
 
     public Employee addEmployee(Employee employee){
@@ -40,7 +43,6 @@ public class EmployeeService {
     public Optional<Employee> findByEmail(String email){
        return employeeRepository.findEmployeeByEmail(email);
     }
-
 
 
 }

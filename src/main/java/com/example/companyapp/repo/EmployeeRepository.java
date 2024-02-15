@@ -1,5 +1,6 @@
 package com.example.companyapp.repo;
 
+import com.example.companyapp.model.department.Department;
 import com.example.companyapp.model.employee.Employee;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,4 +15,5 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long> {
     Optional<Employee> findEmployeeById(Long id);
 
     Optional findEmployeeByEmail(String email);
+
 }

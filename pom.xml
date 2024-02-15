@@ -14,7 +14,7 @@
     <name>CompanyApp</name>
     <description>CompanyApp</description>
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <spring-security.version>6.2.1</spring-security.version>
     </properties>
@@ -22,6 +22,8 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>3.0.4</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
